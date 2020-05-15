@@ -129,7 +129,7 @@ services:
       - etcd0
       - etcd1
       - etcd2
-  networks:
-    default:
-      external:
-        name: weave
+networks:
+  default:
+    external:
+      name: weave
