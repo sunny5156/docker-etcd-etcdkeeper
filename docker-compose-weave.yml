@@ -5,6 +5,7 @@ services:
     container_name: etcd0
     ports:
       - 2379
+    network_mode: "bridge"
     environment:
       WEAVE_CIDR: 192.168.2.100/22
     volumes:
@@ -42,6 +43,7 @@ services:
     container_name: etcd1
     ports:
       - 2379
+    network_mode: "bridge"
     environment:
       WEAVE_CIDR: 192.168.2.101/22
     volumes:
@@ -79,6 +81,7 @@ services:
     container_name: etcd2
     ports:
       - 2379
+    network_mode: "bridge"
     environment:
       WEAVE_CIDR: 192.168.2.102/22
     volumes:
@@ -119,6 +122,7 @@ services:
     volumes:
       - ./bin/logs:/app/logs
       - ./bin/tlskey:/etc/etcd/etcdSSL
+    network_mode: "bridge"
     environment:
       WEAVE_CIDR: 192.168.2.99/22
     depends_on:
