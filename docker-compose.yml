@@ -1,0 +1,120 @@
+version: '3'
+services:
+  etcd0:
+    image: quay.io/coreos/etcd:v3.3
+    container_name: etcd0
+    ports:
+      - 2379
+    volumes:
+      - ./bin/tlskey:/etc/etcd/etcdSSL
+    command:
+      - /usr/local/bin/etcd
+      - -name
+      - etcd0
+      - --data-dir
+      - /etcd_data
+      - -advertise-client-urls
+      - http://etcd0:2379
+      - -listen-client-urls
+      - http://0.0.0.0:2379
+      - -initial-advertise-peer-urls
+      - http://etcd0:2380
+      - -listen-peer-urls
+      - http://0.0.0.0:2380
+      - -initial-cluster
+      - etcd0=http://etcd0:2380,etcd1=http://etcd1:2380,etcd2=http://etcd2:2380
+      - --cert-file
+      - /etc/etcd/etcdSSL/etcd.pem
+      - --key-file
+      - /etc/etcd/etcdSSL/etcd-key.pem
+      - --peer-cert-file
+      - /etc/etcd/etcdSSL/etcd.pem
+      - --peer-key-file
+      - /etc/etcd/etcdSSL/etcd-key.pem
+      - --trusted-ca-file
+      - /etc/etcd/etcdSSL/etcd-root-ca.pem
+      - --peer-trusted-ca-file
+      - /etc/etcd/etcdSSL/etcd-root-ca.pem
+  etcd1:
+    image: quay.io/coreos/etcd:v3.3
+    container_name: etcd1
+    ports:
+      - 2379
+    volumes:
+      - ./bin/tlskey:/etc/etcd/etcdSSL
+    command:
+      - /usr/local/bin/etcd
+      - -name
+      - etcd1
+      - --data-dir
+      - /etcd_data
+      - -advertise-client-urls
+      - http://etcd1:2379
+      - -listen-client-urls
+      - http://0.0.0.0:2379
+      - -initial-advertise-peer-urls
+      - http://etcd1:2380
+      - -listen-peer-urls
+      - http://0.0.0.0:2380
+      - -initial-cluster
+      - etcd0=http://etcd0:2380,etcd1=http://etcd1:2380,etcd2=http://etcd2:2380
+      - --cert-file
+      - /etc/etcd/etcdSSL/etcd.pem
+      - --key-file
+      - /etc/etcd/etcdSSL/etcd-key.pem
+      - --peer-cert-file
+      - /etc/etcd/etcdSSL/etcd.pem
+      - --peer-key-file
+      - /etc/etcd/etcdSSL/etcd-key.pem
+      - --trusted-ca-file
+      - /etc/etcd/etcdSSL/etcd-root-ca.pem
+      - --peer-trusted-ca-file
+      - /etc/etcd/etcdSSL/etcd-root-ca.pem
+  etcd2:
+    image: quay.io/coreos/etcd:v3.3
+    container_name: etcd2
+    ports:
+      - 2379
+    volumes:
+      - ./bin/tlskey:/etc/etcd/etcdSSL
+    command:
+      - /usr/local/bin/etcd
+      - -name
+      - etcd2
+      - --data-dir
+      - /etcd_data
+      - -advertise-client-urls
+      - http://etcd2:2379
+      - -listen-client-urls
+      - http://0.0.0.0:2379
+      - -initial-advertise-peer-urls
+      - http://etcd2:2380
+      - -listen-peer-urls
+      - http://0.0.0.0:2380
+      - -initial-cluster
+      - etcd0=http://etcd0:2380,etcd1=http://etcd1:2380,etcd2=http://etcd2:2380
+      - --cert-file
+      - /etc/etcd/etcdSSL/etcd.pem
+      - --key-file
+      - /etc/etcd/etcdSSL/etcd-key.pem
+      - --peer-cert-file
+      - /etc/etcd/etcdSSL/etcd.pem
+      - --peer-key-file
+      - /etc/etcd/etcdSSL/etcd-key.pem
+      - --trusted-ca-file
+      - /etc/etcd/etcdSSL/etcd-root-ca.pem
+      - --peer-trusted-ca-file
+      - /etc/etcd/etcdSSL/etcd-root-ca.pem
+  etcdkeeper:
+    build: ./etcdkeeper
+    #image: "shiguanghuxian/etcd-manage:1"
+    container_name: etcdkeeper
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./bin/logs:/app/logs
+      - ./bin/tlskey:/etc/etcd/etcdSSL
+    depends_on:
+      - etcd0
+      - etcd1
+      - etcd2
