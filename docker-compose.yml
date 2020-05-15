@@ -107,7 +107,6 @@ services:
       - /etc/etcd/etcdSSL/etcd-root-ca.pem
   etcdkeeper:
     build: ./etcdkeeper
-    #image: "shiguanghuxian/etcd-manage:1"
     container_name: etcdkeeper
     ports:
       - "8080:8080"
