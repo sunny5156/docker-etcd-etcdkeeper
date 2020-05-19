@@ -7,6 +7,7 @@ services:
       - 2379
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
+      - ./data/etcd0:/default.etcd
     command:
       - /usr/local/bin/etcd
       - -name
@@ -42,6 +43,7 @@ services:
       - 2379
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
+      - ./data/etcd1:/default.etcd
     command:
       - /usr/local/bin/etcd
       - -name
@@ -77,6 +79,7 @@ services:
       - 2379
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
+      - ./data/etcd2/:/default.etcd
     command:
       - /usr/local/bin/etcd
       - -name

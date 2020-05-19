@@ -10,6 +10,7 @@ services:
       WEAVE_CIDR: 192.168.2.100/22
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
+      - ./data/etcd0/:/default.etcd
     command:
       - /usr/local/bin/etcd
       - -name
@@ -48,6 +49,7 @@ services:
       WEAVE_CIDR: 192.168.2.101/22
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
+      - ./data/etcd1/:/default.etcd
     command:
       - /usr/local/bin/etcd
       - -name
@@ -86,6 +88,7 @@ services:
       WEAVE_CIDR: 192.168.2.102/22
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
+      - ./data/etcd2/:/default.etcd
     command:
       - /usr/local/bin/etcd
       - -name
