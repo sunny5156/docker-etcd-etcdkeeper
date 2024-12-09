@@ -1,10 +1,10 @@
-version: '3'
+version: '3.8'
 services:
   etcd0:
-    image: quay.io/coreos/etcd:v3.3
+    image: quay.io/coreos/etcd:v3.5.0
     container_name: etcd0
     ports:
-      - 2379
+      - 22379:2379
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
       - ./data/etcd0:/default.etcd
@@ -37,10 +37,10 @@ services:
       - --peer-trusted-ca-file
       - /etc/etcd/etcdSSL/etcd-root-ca.pem
   etcd1:
-    image: quay.io/coreos/etcd:v3.3
+    image: quay.io/coreos/etcd:v3.5.0
     container_name: etcd1
     ports:
-      - 2379
+      - 22380:2379
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
       - ./data/etcd1:/default.etcd
@@ -73,10 +73,10 @@ services:
       - --peer-trusted-ca-file
       - /etc/etcd/etcdSSL/etcd-root-ca.pem
   etcd2:
-    image: quay.io/coreos/etcd:v3.3
+    image: quay.io/coreos/etcd:v3.5.0
     container_name: etcd2
     ports:
-      - 2379
+      - 22381:2379
     volumes:
       - ./bin/tlskey:/etc/etcd/etcdSSL
       - ./data/etcd2/:/default.etcd
